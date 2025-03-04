@@ -44,7 +44,7 @@ public class Q1B {
     // Initialize a min-heap to store the combined returns along with their indices
     PriorityQueue<int[]> minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0]));
 
-    // Add combinations of the first element in returns1 with the elements in
+    // product combinations of the first element in returns1 with the elements in
     // returns2
     for (int j = 0; j < returns2.length && j < k; j++) {
       int prod = returns1[0] * returns2[j]; // Calculate the product of returns

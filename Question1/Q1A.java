@@ -38,38 +38,41 @@ public class Q1A {
     // Initialize a 2D dynamic programming array with (k+1) rows and (n+1) columns
     int[][] dp = new int[k + 1][n + 1];
 
-    // Base cases:
-    // If there's only 1 sample, we need to perform n measurements (one for each
-    // level)
+    // Base case: If there's only 1 sample, we need to perform n measurements (one
+    // for each level)
     for (int j = 1; j <= n; j++) {
       dp[1][j] = j;
     }
 
-    // If there are 0 levels, no measurements are needed
+    // Base case: If there are 0 levels, no measurements are needed
     for (int i = 1; i <= k; i++) {
       dp[i][0] = 0;
     }
 
     // Fill the dynamic programming table for k samples and n levels
-    for (int i = 2; i <= k; i++) { // Begin with 2 samples
+    for (int i = 2; i <= k; i++) { // Start from 2 samples
       for (int j = 1; j <= n; j++) { // Iterate through all possible levels
-        dp[i][j] = Integer.MAX_VALUE; // Set the value to infinity initially
-        int low = 1, high = j;
+        dp[i][j] = Integer.MAX_VALUE; // Initialize with a large number (infinity)
 
-        // Apply binary search to find the best splitting point
+        // Binary search for the optimal temperature level to minimize worst-case
+        // scenario
+        int low = 1, high = j;
         while (low <= high) {
           int mid = (low + high) / 2;
-          int breaks = dp[i - 1][mid - 1]; // Case where the material breaks
-          int doesNotBreak = dp[i][j - mid]; // Case where the material does not break
+          int breaks = dp[i - 1][mid - 1]; // Case when the material breaks
+          int doesNotBreak = dp[i][j - mid]; // Case when the material doesn't break
+
+          // The worst-case number of measurements when testing at `mid`
           int worstCase = 1 + Math.max(breaks, doesNotBreak);
 
+          // Minimize the number of measurements
           dp[i][j] = Math.min(dp[i][j], worstCase);
 
-          // Update the binary search range
+          // Update the search range based on the result
           if (breaks > doesNotBreak) {
-            high = mid - 1;
+            high = mid - 1; // Try a lower value of `mid`
           } else {
-            low = mid + 1;
+            low = mid + 1; // Try a higher value of `mid`
           }
         }
       }
