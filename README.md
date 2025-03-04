@@ -5,8 +5,8 @@
 This repo contains my solutions to the coursework for the **ST5008CEM: Programming for Developers** module. The assignment includes multiple programming tasks based on algorithms, data structures, and problem-solving concepts.
 
 ### Tools Used
-- **Languages**: Java, 
-- **Libraries**: JavaFX, Java Swing
+- **Languages**: Java, MySQL
+- **Libraries**: Java Swing
 
 ## Installation & Usage
 
